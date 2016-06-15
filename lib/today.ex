@@ -1,0 +1,2 @@
+defmodule Today do
+end
