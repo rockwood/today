@@ -2,24 +2,16 @@
 
 Today is a command line tool for automating daily journals.
 
+## Dependencies
+
+Elixir >= 1.3.0
+
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add today to your list of dependencies in `mix.exs`:
-
-        def deps do
-          [{:today, "~> 0.0.1"}]
-        end
-
-  2. Ensure today is started before your application:
-
-        def application do
-          [applications: [:today]]
-        end
+    mix escript.install https://github.com/rockwood/today/raw/master/today
 
 # Usage
 
     today "is a good day"
 
-This creates or updates the file `~/today/YYYY-MM-DD.md` and appends the line "is a good day"
+This creates or updates the file `~/today/YYYY-MM-DD.md` with the given entry.
