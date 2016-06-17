@@ -1,10 +1,10 @@
 defmodule Today.Runner do
-  alias Today.Format
+  alias Today.Entry
 
-  def run(message, dir \\ System.user_home) do
-    create_dir(dir)
-    File.open "#{dir}/#{Format.filename}", [:utf8, :read, :append], fn(file) ->
-      write_file(file, message)
+  def run(entry) do
+    create_dir(entry.dir)
+    File.open Entry.path(entry), [:utf8, :read, :append], fn(file) ->
+      write_file(file, entry)
     end
   end
 
@@ -12,16 +12,12 @@ defmodule Today.Runner do
     File.mkdir_p(dir)
   end
 
-  defp write_file(file, message) do
-    write_heading(file)
-    IO.write(file, message)
-  end
-
-  defp write_heading(file) do
+  defp write_file(file, entry) do
     if IO.gets(file, :all) == :eof do
-      IO.write(file, Format.date_heading)
+      IO.write(file, Entry.date_heading(entry))
     end
 
-    IO.write(file, Format.time_heading)
+    IO.write(file, Entry.time_heading(entry))
+    IO.write(file, Entry.formated_body(entry))
   end
 end

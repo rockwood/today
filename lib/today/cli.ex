@@ -1,5 +1,5 @@
 defmodule Today.CLI do
-  alias Today.Runner
+  alias Today.{Entry, Runner}
 
   @moduledoc """
     usage: today [options]
@@ -24,15 +24,16 @@ defmodule Today.CLI do
     IO.puts @moduledoc
     System.halt(0)
   end
-  def process({message}) do
-    Runner.run(%{message: message, dir: System.user_home})
+  def process({body}) do
+    %Entry{body: body}
+    |> Runner.run
   end
 
-  defp handle_parse({[help: true], _, _ }) do
+  defp handle_parse({[help: true], _, _}) do
     :help
   end
-  defp handle_parse({ _, [message], _ }) do
-    {message}
+  defp handle_parse({_, [body], _}) do
+    {body}
   end
   defp handle_parse(_) do
     :help
