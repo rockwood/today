@@ -25,7 +25,7 @@ defmodule Today.CLI do
     System.halt(0)
   end
   def process({body}) do
-    %Entry{body: body}
+    Entry.from_body(body)
     |> Runner.run
   end
 

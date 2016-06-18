@@ -1,5 +1,13 @@
 defmodule Today.Entry do
-  defstruct timestamp: DateTime.utc_now, dir: "#{System.user_home}/today", body: ""
+  defstruct [:timestamp, :dir, :body]
+
+  def from_body(body) do
+    struct(__MODULE__, %{
+      timestamp: DateTime.utc_now,
+      dir: "#{System.user_home}/today",
+      body: body
+     })
+  end
 
   def path(entry) do
     "#{entry.dir}/#{padded_date(entry.timestamp)}.md"
