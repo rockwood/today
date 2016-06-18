@@ -15,13 +15,13 @@ defmodule Today.EntryTest do
 
   describe "Entry.time_heading/1" do
     test "formats the current time" do
-      assert Entry.time_heading(@test_entry) == "## 14:30\n\n"
+      assert Entry.time_heading(@test_entry) =~ "14:30"
     end
   end
 
   describe "Entry.date_heading/1" do
     test "formats the current date" do
-      assert Entry.date_heading(@test_entry) == "# 1987-04-23\n\n"
+      assert Entry.date_heading(@test_entry) =~ "1987-04-23"
     end
   end
 end
